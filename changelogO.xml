@@ -6,8 +6,8 @@
   <!-- ********************************************************************* -->
   <!-- ******************JDBC runWith Changes ****************************** -->
   <!-- ********************************************************************* -->
-  <changeSet author="Liquibase Pro User" id="1::runSQLTableWithJDBC" runWith="jdbc">
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="1::runSQLTableWithSQLPlus" runWith="sqlplus">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE employees
       (
         employee_id NUMBER PRIMARY KEY,
@@ -26,23 +26,13 @@
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User"
-    id="2::runXMLTableWithJDBC" runWith="jdbc">
-    <createTable tableName="pepes">
-      <column name="pepe_id" type="NUMBER">
-        <constraints primaryKey="true"/>
-      </column>
-      <column name="first_name" type="VARCHAR2(50 BYTE)"/>
-      <column name="last_name" type="VARCHAR2(50 BYTE)"/>
-    </createTable>
+  <changeSet author="Liquibase Pro User" id="3::runFileTableWithSQLPlus" runWith="sqlplus">
+    <sqlFile dbms="oracle" splitStatements="false" relativeToChangelogFile="true"
+      path="sql/lbpro_runWith_table.sql"/>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="3::runFileTableWithJDBC" runWith="jdbc">
-    <sqlFile dbms="oracle" endDelimiter=";" splitStatements="false" relativeToChangelogFile="true" path="sql/lbpro_runWith_table.sql"/>
-  </changeSet>
-
-  <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithJDBC" runWith="jdbc">
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithSQLPlus" runWith="sqlplus">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE partyparrots
       (
         partyparrot_id NUMBER,
@@ -52,12 +42,13 @@
       );
     </sql>
     <rollback>
-      <sqlFile endDelimiter=";" path="sql/lbpro_runWith_table_rollback.sql" splitStatements="true" stripComments="true"/>
+      <sqlFile endDelimiter=";" path="sql/lbpro_runWith_table_rollback.sql" splitStatements="false"
+        stripComments="true"/>
     </rollback>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithJDBC" runWith="jdbc">
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithSQLPlus" runWith="sqlplus">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE doggies
       (
         doggy_id   NUMBER,
@@ -66,7 +57,7 @@
         PRIMARY KEY (doggy_id)
       );
     </sql>
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE slothies
       (
         sloth_id   NUMBER,
@@ -75,7 +66,7 @@
         PRIMARY KEY (sloth_id)
       );
     </sql>
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE murderofcrows
       (
         crow_id    NUMBER,
@@ -86,43 +77,24 @@
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="6::runSQLViewWithJDBC" runWith="jdbc">
-    <sql dbms="oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="6::runSQLViewWithSQLPlus" runWith="sqlplus">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE VIEW employee_yos AS
-      SELECT
-        employee_id,
-        first_name || ' ' || last_name full_name,
-        FLOOR( months_between( CURRENT_DATE, hire_date )/ 12 ) yos
-      FROM
-        employees;
+      SELECT employee_id,
+             first_name || ' ' || last_name                      full_name,
+             FLOOR(months_between(CURRENT_DATE, hire_date) / 12) yos
+      FROM employees;
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User"
-    id="7::runFullDefViewWithJDBC" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runWith="jdbc">
-    <createView fullDefinition="true"
-      viewName="PEPEVIEW">CREATE OR REPLACE FORCE VIEW PEPEVIEW (first_name) AS SELECT first_name FROM "pepes"</createView>
-  </changeSet>
-
-  <changeSet author="Liquibase Pro User" id="8::runFileProcWithJDBC" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runWith="jdbc">
-    <createProcedure path="sql/lbpro_runWith_proc.sql" procedureName="PROC_HELLO_WORLD"/>
-  </changeSet>
-
-  <changeSet author="Liquibase Pro User" id="9::runSQLProcWithJDBC" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runWith="jdbc">
-    <sql dbms="oracle" endDelimiter="/" splitStatements="true" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="9::runSQLProcWithSQLPlus" objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+    runWith="sqlplus">
+    <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE OR REPLACE PROCEDURE "SECOND_PROC" AS
       BEGIN
-  DBMS_OUTPUT.PUT_LINE('Second proc!');
-      END SECOND_PROC
+            DBMS_OUTPUT.PUT_LINE('Second proc!');
+      END SECOND_PROC;
       /
     </sql>
   </changeSet>
-
-  <changeSet author="Liquibase Pro User" id="10::runFullDefProcWithJDBC" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runWith="jdbc">
-    <createProcedure fullDefinition="true" procedureName="THIRD_PROC">CREATE OR REPLACE PROCEDURE "THIRD_PROC" AS
-    BEGIN
-  DBMS_OUTPUT.PUT_LINE('Third proc!');
-    END THIRD_PROC</createProcedure>
-  </changeSet>
-
 </databaseChangeLog>
