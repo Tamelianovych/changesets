@@ -1,0 +1,80 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+  <!-- ********************************************************************* -->
+  <!-- ******************JDBC runWith Changes ****************************** -->
+  <!-- ********************************************************************* -->
+  <changeSet author="Liquibase Pro User" id="1::runSQLTableWithPsql" runWith="psql">
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE TABLE employees
+      (
+        employee_id VARCHAR(50)  NOT NULL,
+        first_name  VARCHAR(50)  NOT NULL,
+        last_name   VARCHAR(255) NOT NULL,
+        email       VARCHAR(255) NOT NULL,
+        phone       VARCHAR(50)  NOT NULL,
+        job_title   VARCHAR(255) NOT NULL
+      )
+    </sql>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="3::runFileTableWithPsql" runWith="psql">
+    <sqlFile dbms="postgresql" splitStatements="false" relativeToChangelogFile="true"
+      path="sql/lbpro_runWith_table.sql"/>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithPsql" runWith="psql">
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE TABLE partyparrots
+      (
+        partyparrot_id VARCHAR(20) NOT NULL,
+        first_name     VARCHAR(50) NOT NULL,
+        last_name      VARCHAR(50) NOT NULL
+      )
+    </sql>
+    <rollback>
+      <sqlFile endDelimiter=";" path="sql/lbpro_runWith_table_rollback.sql" splitStatements="false"
+        stripComments="true"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithPsql" runWith="psql">
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE TABLE doggies
+      (
+        ID         int          NOT NULL PRIMARY KEY,
+        first_name varchar(255) NOT NULL,
+        last_name  varchar(255),
+        Age        int
+      );
+    </sql>
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE TABLE slothies
+      (
+        ID         int          NOT NULL PRIMARY KEY,
+        first_name varchar(255) NOT NULL,
+        last_name  varchar(255),
+        Age        int
+      );
+    </sql>
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE TABLE murderofcrows
+      (
+        ID         int          NOT NULL PRIMARY KEY,
+        first_name varchar(255) NOT NULL,
+        last_name  varchar(255) NOT NULL,
+        Age        int
+      );
+    </sql>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="6::runSQLViewWithPsql" runWith="psql">
+    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+      CREATE VIEW employee_yos AS
+      SELECT first_name, last_name, email
+      FROM employees;
+    </sql>
+  </changeSet>
+</databaseChangeLog>
