@@ -44,6 +44,10 @@
         last_name      VARCHAR(50) NOT NULL,
       )
     </sql>
+    <rollback>
+      <sqlFile endDelimiter=";" path="sql/lbpro_runWith_table_rollback.sql" splitStatements="false"
+        stripComments="true"/>
+    </rollback>
   </changeSet>
 
   <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithsqlcmd" runWith="sqlcmd">
