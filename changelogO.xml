@@ -26,11 +26,6 @@
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="3::runFileTableWithSQLPlus" runWith="sqlplus">
-    <sqlFile dbms="oracle" splitStatements="false" relativeToChangelogFile="true"
-      path="sql/lbpro_runWith_table.sql"/>
-  </changeSet>
-
   <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithSQLPlus" runWith="sqlplus">
     <sql dbms="oracle" splitStatements="false" stripComments="true">
       CREATE TABLE partyparrots
@@ -41,10 +36,6 @@
         PRIMARY KEY (partyparrot_id)
       );
     </sql>
-    <rollback>
-      <sqlFile endDelimiter=";" path="sql/lbpro_runWith_table_rollback.sql" splitStatements="false"
-        stripComments="true"/>
-    </rollback>
   </changeSet>
 
   <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithSQLPlus" runWith="sqlplus">
