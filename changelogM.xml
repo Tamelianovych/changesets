@@ -6,8 +6,8 @@
   <!-- ********************************************************************* -->
   <!-- ******************JDBC runWith Changes ****************************** -->
   <!-- ********************************************************************* -->
-  <changeSet author="Liquibase Pro User" id="1::runSQLTableWithPsql" runWith="psql">
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="1::runSQLTableWithsqlcmd" runWith="sqlcmd">
+    <sql dbms="mssql" splitStatements="false" stripComments="true">
       CREATE TABLE employees
       (
         employee_id VARCHAR(50)  NOT NULL,
@@ -20,19 +20,34 @@
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithPsql" runWith="psql">
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="3.1::runFileTableWithsqlcmd" runWith="sqlcmd" runOnChange="true">
+    <sqlFile dbms="mssql" splitStatements="true" relativeToChangelogFile="true"
+      path="sql/lbpro_runWith_table.sql"/>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="3.2::runFileTableWithsqlcmd" runWith="sqlcmd" runOnChange="false">
+    <sqlFile dbms="mssql" splitStatements="false" relativeToChangelogFile="true"
+      path="sql/lbpro_runWith_table2.sql"/>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="3.3::runFileTableWithsqlcmd" runWith="sqlcmd">
+    <sqlFile dbms="mssql" relativeToChangelogFile="true"
+      path="sql/lbpro_runWith_table3.sql"/>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="4::runSQLTableWithRollbackWithsqlcmd" runWith="sqlcmd">
+    <sql dbms="mssql" splitStatements="true" stripComments="true">
       CREATE TABLE partyparrots
       (
         partyparrot_id VARCHAR(20) NOT NULL,
         first_name     VARCHAR(50) NOT NULL,
-        last_name      VARCHAR(50) NOT NULL
+        last_name      VARCHAR(50) NOT NULL,
       )
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithPsql" runWith="psql">
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="5::run3SQLTableWithsqlcmd" runWith="sqlcmd">
+    <sql dbms="mssql" stripComments="true">
       CREATE TABLE doggies
       (
         ID         int          NOT NULL PRIMARY KEY,
@@ -41,7 +56,7 @@
         Age        int
       );
     </sql>
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+    <sql dbms="mssql" splitStatements="false" stripComments="true">
       CREATE TABLE slothies
       (
         ID         int          NOT NULL PRIMARY KEY,
@@ -50,7 +65,7 @@
         Age        int
       );
     </sql>
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+    <sql dbms="mssql" splitStatements="true" stripComments="true">
       CREATE TABLE murderofcrows
       (
         ID         int          NOT NULL PRIMARY KEY,
@@ -61,8 +76,8 @@
     </sql>
   </changeSet>
 
-  <changeSet author="Liquibase Pro User" id="6::runSQLViewWithPsql" runWith="psql">
-    <sql dbms="postgresql" splitStatements="false" stripComments="true">
+  <changeSet author="Liquibase Pro User" id="6::runSQLViewWithsqlcmd" runWith="sqlcmd">
+    <sql dbms="mssql" stripComments="true">
       CREATE VIEW employee_yos AS
       SELECT first_name, last_name, email
       FROM employees;
