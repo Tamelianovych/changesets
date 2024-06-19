@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+  <!-- SETUP: Create tables for other objects to use. -->
+  <changeSet author="Liquibase Pro User" id="createPrimaryTable" objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+    labels="community,primaryTable,updateCountLabel,updateToTagLabel,futureRollbackSqlLabel">
+    <createTable tableName="PRIMARY_TABLE">
+      <column name="ID" type="NCHAR(10)">
+        <constraints primaryKey="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro User" id="createSecondaryTable" objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+    labels="community,secondaryTable,updateCountLabel,updateToTagLabel,futureRollbackSqlLabel">
+    <createTable tableName="SECONDARY_TABLE">
+      <column name="ID" type="aaa"/>
+      <column name="TEXT_COLUMN" type="VARCHAR(255)"/>
+      <column name="FK_COL" type="NCHAR(10)"/>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>
