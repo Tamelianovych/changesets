@@ -19,7 +19,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
   <changeSet author="Liquibase Pro User" id="createSecondaryTable" objectQuotingStrategy="QUOTE_ALL_OBJECTS"
     labels="community,secondaryTable,updateCountLabel,updateToTagLabel,futureRollbackSqlLabel">
     <createTable tableName="SECONDARY_TABLE">
-      <column name="ID" type="aaa"/>
+      <column name="ID" type="VARCHAR(255)"/>
       <column name="TEXT_COLUMN" type="VARCHAR(255)"/>
       <column name="FK_COL" type="NCHAR(10)"/>
     </createTable>
