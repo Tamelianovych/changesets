@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="1" author="lbuser">
+        <createTable tableName="myTable">
+            <column name="id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="lbuser">
+        <createProcedure procedureName="procedure1">
+            CREATE OR REPLACE PROCEDURE testHello4
+            LANGUAGE SQL
+            AS $$
+            DBMS_OUTPUT.PUT_LINE('Hello From The Database!');
+            $$;
+        </createProcedure>
+        <rollback>
+            DROP PROCEDURE procedure1;
+        </rollback>
+    </changeSet>
+    <changeSet id="3" author="lbuser">
+        <createProcedure procedureName="procedure3">
+            CREATE OR REPLACE PROCEDURE testHello4
+            LANGUAGE SQL
+            AS $$
+            DBMS_OUTPUT.PUT_LINE('Hello From The Database!');
+            $$;
+        </createProcedure>
+        <rollback></rollback>
+    </changeSet>
+    <changeSet id="4" author="lbuser">
+        <createProcedure procedureName="procedure4">
+            CREATE OR REPLACE PROCEDURE testHello4
+            LANGUAGE SQL
+            AS $$
+            DBMS_OUTPUT.PUT_LINE('Hello From The Database!');
+            $$;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>
