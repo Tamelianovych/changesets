@@ -1,0 +1,26 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+  <changeSet author="Liquibase Pro User" id="00081723-a824-4732-a2bf-40fc6728114a" labels="proLabel">
+    <comment>A sample change log</comment>
+    <createTable tableName="ACCOUNT">
+      <column name="name" type="CHAR(20)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="liquibase-docs" id="setTableRemarks-example" labels="proLabel">
+    <setTableRemarks
+      remarks="checks"
+      tableName="ACCOUNT"/>
+  </changeSet>
+
+  <changeSet author="Liquibase Pro" id="modify-column">
+    <modifyDataType
+      columnName="name"
+      newDataType="char(100)"
+      tableName="ACCOUNT"/>
+  </changeSet>
+</databaseChangeLog>
