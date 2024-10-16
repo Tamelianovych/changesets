@@ -3,24 +3,20 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-
-  <changeSet author="Liquibase Pro User" id="00081723-a824-4732-a2bf-40fc6728114a" labels="proLabel">
-    <comment>A sample change log</comment>
-    <createTable tableName="ACCOUNT">
-      <column name="name" type="CHAR(20)"/>
+  <changeSet author="Liquibase Pro User" id="createPrimaryTable" objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+    labels="community,primaryTable,updateCountLabel,updateToTagLabel,futureRollbackSqlLabel">
+    <createTable tableName="PRIMARY_TABLE">
+      <column name="ID" type="NCHAR(10)">
+        <constraints primaryKey="true"/>
+      </column>
     </createTable>
   </changeSet>
 
-  <changeSet author="liquibase-docs" id="setTableRemarks-example" labels="proLabel">
-    <setTableRemarks
-      remarks="checks"
-      tableName="ACCOUNT"/>
-  </changeSet>
-
-  <changeSet author="Liquibase Pro" id="modify-column">
-    <modifyDataType
-      columnName="name"
-      newDataType="char(100)"
-      tableName="ACCOUNT"/>
+  <changeSet author="Liquibase Pro User" id="createSecondaryTable" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <createTable tableName="SECONDARY_TABLE">
+      <column name="ID" type="NCHAR(10)"/>
+      <column name="TEXT_COLUMN" type="VARCHAR(255)"/>
+      <column name="FK_COL" type="NCHAR(10)"/>
+    </createTable>
   </changeSet>
 </databaseChangeLog>
